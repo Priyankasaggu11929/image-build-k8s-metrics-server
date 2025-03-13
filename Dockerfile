@@ -1,6 +1,6 @@
 #!UseOBSRepositories
 
-#!BuildTag: rancher/image-build-k8s-metrics-server:v3.4.7
+#!BuildTag: rancher/image-build-k8s-metrics-server:v0.7.2
 #!BuildTag: rancher/image-build-k8s-metrics-server:latest
 #!BuildName: image-build-k8s-metrics-server
 
