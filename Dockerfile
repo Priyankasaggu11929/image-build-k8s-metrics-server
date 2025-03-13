@@ -25,6 +25,8 @@ RUN set -euo pipefail; \
     zypper -n clean; \
     rm -rf {/target,}/var/log/{alternatives.log,lastlog,tallylog,zypper.log,zypp/history,YaST2}
 
+RUN zypper -n install -t pattern devel_basis
+
 # setup the build
 FROM base-builder as metrics-builder
 ARG PKG="github.com/kubernetes-incubator/metrics-server"
