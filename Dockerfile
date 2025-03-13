@@ -41,7 +41,6 @@ WORKDIR $GOPATH/src/${PKG}
 
 RUN ls $GOPATH/src/${PKG}
 
-
 RUN go install -mod=readonly -modfile=scripts/go.mod -mod=vendor k8s.io/kube-openapi/cmd/openapi-gen && \
     ${GOPATH}/bin/openapi-gen --logtostderr \
     -i k8s.io/metrics/pkg/apis/metrics/v1beta1,k8s.io/apimachinery/pkg/apis/meta/v1,k8s.io/apimachinery/pkg/api/resource,k8s.io/apimachinery/pkg/version \
@@ -51,16 +50,14 @@ RUN go install -mod=readonly -modfile=scripts/go.mod -mod=vendor k8s.io/kube-ope
     -r /dev/null;
 # cross-compilation setup
 ARG TARGETPLATFORM
-RUN xx-go --wrap && \
-    CGO_ENABLED=1 \
+RUN CGO_ENABLED=1 \
     GO_LDFLAGS="-linkmode=external \
     -X ${PKG}/pkg/version.Version=${TAG} \
     -X ${PKG}/pkg/version.gitCommit=$(git rev-parse HEAD) \
     -X ${PKG}/pkg/version.gitTreeState=clean \
     " \
-    go-build-static.sh -gcflags=-trimpath=${GOPATH}/src -o bin/metrics-server ./cmd/metrics-server
+    go-build-static.sh -gcflags=-trimpath=${GOPATH}/src -mod=vendor -o bin/metrics-server ./cmd/metrics-server
 RUN go-assert-static.sh bin/*
-RUN xx-verify --static bin/*
 RUN if [ "${TARGETARCH}" = "amd64" ]; then \
        go-assert-boring.sh bin/*; \
     fi
