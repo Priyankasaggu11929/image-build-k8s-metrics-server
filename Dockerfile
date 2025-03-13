@@ -7,7 +7,6 @@
 ARG GO_IMAGE=rancher/image-build-base:latest
 
 FROM ${GO_IMAGE} as base-builder
-RUN apk add file make git clang lld 
 ARG TARGETPLATFORM
 # setup required packages
 RUN set -euo pipefail; \
