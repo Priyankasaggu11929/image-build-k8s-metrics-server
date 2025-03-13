@@ -22,7 +22,6 @@ RUN set -euo pipefail; \
     musl-libc-static \
     make; \
     # zypper -n install -t pattern devel_basis; \
-    zypper search devel_basis; \
     zypper -n clean; \
     rm -rf {/target,}/var/log/{alternatives.log,lastlog,tallylog,zypper.log,zypp/history,YaST2}
 
