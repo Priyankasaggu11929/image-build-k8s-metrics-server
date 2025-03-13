@@ -12,7 +12,7 @@ ARG TARGETPLATFORM
 RUN set -euo pipefail; \
     zypper -n install --no-recommends \
     # file \
-    gcc \
+    # gcc \
     # git \
     libselinux-devel \
     libseccomp-devel \ 
