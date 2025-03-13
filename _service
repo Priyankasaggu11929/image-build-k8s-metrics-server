@@ -10,7 +10,11 @@
   </service>
   <service name="go_modules">
     <param name="archive">*metrics-server.obscpio</param>
+  </service>
+  <service name="go_modules">
+    <param name="archive">*metrics-server.obscpio</param>
     <param name="subdir">scripts</param>
+    <param name="vendorname">vendor-scripts</param>
   </service>
   <service name="download_assets" />
 </services>
