@@ -36,7 +36,7 @@ ARG TARGETARCH
 
 COPY metrics-server ${GOPATH}/src/${PKG}
 ADD vendor.tar.gz ${GOPATH}/src/${PKG}/cmd
-ADD vendor.tar.gz ${GOPATH}/src/${PKG}
+ADD vendor-scripts.tar.gz ${GOPATH}/src/${PKG}
 
 WORKDIR $GOPATH/src/${PKG}
 
