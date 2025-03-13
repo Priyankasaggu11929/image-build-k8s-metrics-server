@@ -25,7 +25,6 @@ RUN set -euo pipefail; \
     zypper -n clean; \
     rm -rf {/target,}/var/log/{alternatives.log,lastlog,tallylog,zypper.log,zypp/history,YaST2}
 
-
 # setup the build
 FROM base-builder as metrics-builder
 ARG PKG="github.com/kubernetes-incubator/metrics-server"
@@ -37,3 +36,5 @@ COPY metrics-server ${GOPATH}/src/${PKG}
 ADD vendor.tar.gz ${GOPATH}/src/${PKG}
 
 WORKDIR $GOPATH/src/${PKG}
+
+RUN ls $GOPATH/src/${PKG}
