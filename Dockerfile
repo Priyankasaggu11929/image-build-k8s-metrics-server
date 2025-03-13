@@ -35,7 +35,7 @@ ARG TAG=v0.7.2
 ARG TARGETARCH
 
 COPY metrics-server ${GOPATH}/src/${PKG}
-ADD vendor.tar.gz ${GOPATH}/src/${PKG}
+ADD vendor.tar.gz ${GOPATH}/src/${PKG}/cmd
 
 WORKDIR $GOPATH/src/${PKG}
 
