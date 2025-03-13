@@ -1,0 +1,15 @@
+<services>
+  <service name="obs_scm">
+    <param name="url">https://github.com/kubernetes-incubator/metrics-server.git</param>
+    <param name="scm">git</param>
+    <param name="package-meta">yes</param>
+    <param name="versionformat">@PARENT_TAG@</param>
+    <param name="versionrewrite-pattern">v(.*)</param>
+    <param name="revision">v0.7.2</param>
+    <param name="without-version">yes</param>
+  </service>
+  <service name="go_modules">
+    <param name="archive">*etcd.obscpio</param>
+  </service>
+  <service name="download_assets" />
+</services>
