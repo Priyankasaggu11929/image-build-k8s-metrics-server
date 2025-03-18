@@ -58,7 +58,7 @@ RUN CGO_ENABLED=1 \
     -X ${PKG}/pkg/version.gitCommit=$(git rev-parse HEAD) \
     -X ${PKG}/pkg/version.gitTreeState=clean \
     " \
-    go-build-static.sh -gcflags=-trimpath=${GOPATH}/src -mod=vendor -o bin/metrics-server ./cmd/metrics-server
+    go-build-static.sh -gcflags=-trimpath=${GOPATH}/src -mod=vendor -buildvcs=false -o bin/metrics-server ./cmd/metrics-server
 RUN go-assert-static.sh bin/*
 RUN if [ "${TARGETARCH}" = "amd64" ]; then \
        go-assert-boring.sh bin/*; \
