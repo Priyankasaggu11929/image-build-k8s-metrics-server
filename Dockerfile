@@ -35,14 +35,14 @@ ARG TAG=v0.7.2
 ARG TARGETARCH
 
 COPY metrics-server ${GOPATH}/src/${PKG}
-ADD vendor.tar.gz ${GOPATH}/src/${PKG}/cmd
 ADD vendor-scripts.tar.gz ${GOPATH}/src/${PKG}
 
 WORKDIR $GOPATH/src/${PKG}
 
 RUN ls $GOPATH/src/${PKG}
 
-RUN go install -mod=readonly -modfile=scripts/go.mod -mod=vendor k8s.io/kube-openapi/cmd/openapi-gen && \
+RUN go install -modfile=scripts/go.mod -mod=vendor k8s.io/kube-openapi/cmd/openapi-gen && \
+    ${GOPATH}/bin/openapi-gen --version; \
     ${GOPATH}/bin/openapi-gen --logtostderr \
     -i k8s.io/metrics/pkg/apis/metrics/v1beta1,k8s.io/apimachinery/pkg/apis/meta/v1,k8s.io/apimachinery/pkg/api/resource,k8s.io/apimachinery/pkg/version \
     -p ${PKG}/pkg/generated/openapi/ \
@@ -51,6 +51,7 @@ RUN go install -mod=readonly -modfile=scripts/go.mod -mod=vendor k8s.io/kube-ope
     -r /dev/null;
 # cross-compilation setup
 ARG TARGETPLATFORM
+ADD vendor.tar.gz .
 RUN CGO_ENABLED=1 \
     GO_LDFLAGS="-linkmode=external \
     -X ${PKG}/pkg/version.Version=${TAG} \
