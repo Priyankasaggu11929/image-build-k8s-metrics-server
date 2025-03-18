@@ -33,6 +33,8 @@ ARG PKG="github.com/kubernetes-incubator/metrics-server"
 ARG SRC="github.com/kubernetes-sigs/metrics-server"
 ARG TAG=v0.7.2
 ARG TARGETARCH
+ENV C_INCLUDE_PATH="/usr/x86_64-linux-musl/include/:/usr/include/"
+ENV CC="musl-gcc"
 
 COPY metrics-server ${GOPATH}/src/${PKG}
 ADD vendor-scripts.tar.gz ${GOPATH}/src/${PKG}
