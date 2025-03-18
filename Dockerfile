@@ -38,6 +38,7 @@ ENV CC="musl-gcc"
 
 COPY metrics-server ${GOPATH}/src/${PKG}
 #ADD vendor-scripts.tar.gz ${GOPATH}/src/${PKG}
+ADD vendor.tar.gz ${GOPATH}/src/${PKG}
 
 WORKDIR $GOPATH/src/${PKG}
 
@@ -50,10 +51,12 @@ RUN go install -modfile=scripts/go.mod -mod=vendor k8s.io/kube-openapi/cmd/opena
     -p ${PKG}/pkg/generated/openapi/ \
     -O zz_generated.openapi \
     -h $(pwd)/scripts/boilerplate.go.txt \
-    -r /dev/null
+     -r /dev/null
+   # -r /dev/null; \
+   # rm -rf vendor
 # cross-compilation setup
 ARG TARGETPLATFORM
-ADD vendor.tar.gz .
+# ADD vendor.tar.gz .
 RUN CGO_ENABLED=1 \
     GO_LDFLAGS="-linkmode=external \
     -X ${PKG}/pkg/version.Version=${TAG} \
