@@ -48,7 +48,7 @@ RUN go install -modfile=scripts/go.mod -mod=vendor k8s.io/kube-openapi/cmd/opena
     -p ${PKG}/pkg/generated/openapi/ \
     -O zz_generated.openapi \
     -h $(pwd)/scripts/boilerplate.go.txt \
-    -r /dev/null;
+    -r /dev/null; \
     rm -rf vendor
 # cross-compilation setup
 ARG TARGETPLATFORM
