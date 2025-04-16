@@ -1,6 +1,6 @@
 #!UseOBSRepositories
 
-#!BuildTag: rancher/hardened-k8s-metrics-server :v0.7.2
+#!BuildTag: rancher/hardened-k8s-metrics-server:v0.7.2
 #!BuildTag: rancher/hardened-k8s-metrics-server:latest
 #!BuildName: hardened-k8s-metrics-server 
 
