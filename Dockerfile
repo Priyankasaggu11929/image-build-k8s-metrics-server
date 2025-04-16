@@ -1,8 +1,12 @@
 #!UseOBSRepositories
 
-#!BuildTag: rancher/image-build-k8s-metrics-server:v0.7.2
-#!BuildTag: rancher/image-build-k8s-metrics-server:latest
-#!BuildName: image-build-k8s-metrics-server
+#!BuildTag: rancher/hardened-k8s-metrics-server :v0.7.2
+#!BuildTag: rancher/hardened-k8s-metrics-server:latest
+#!BuildName: hardened-k8s-metrics-server 
+
+# INFO: image-build-base:latest provides the following:
+# - required packages (make, musl-gcc, musl-libc-static, etc)
+# - set CC, and C_INCLUDE_PATH evironment variables, to enable building with musl libc
 
 ARG GO_IMAGE=rancher/image-build-base:latest
 
@@ -11,16 +15,10 @@ ARG TARGETPLATFORM
 # setup required packages
 RUN set -euo pipefail; \
     zypper -n install --no-recommends \
-    # file \
-    # gcc \
-    # git \
     libselinux-devel \
-    libseccomp-devel \ 
-    # glibc \
-    # glibc-devel-static \    
+    libseccomp-devel \  
     musl-gcc \
-    musl-libc-static \
-    make; \
+    musl-libc-static ; \
     # TODO(psaggu): check which repo provides this in SLE BCI images
     # zypper -n install -t pattern devel_basis; \
     zypper -n clean; \
@@ -33,8 +31,6 @@ ARG PKG="github.com/kubernetes-incubator/metrics-server"
 ARG SRC="github.com/kubernetes-sigs/metrics-server"
 ARG TAG=v0.7.2
 ARG TARGETARCH
-ENV C_INCLUDE_PATH="/usr/x86_64-linux-musl/include/:/usr/include/"
-ENV CC="musl-gcc"
 
 COPY metrics-server ${GOPATH}/src/${PKG}
 
