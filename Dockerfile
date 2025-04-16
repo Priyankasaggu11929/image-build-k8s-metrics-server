@@ -16,9 +16,7 @@ ARG TARGETPLATFORM
 RUN set -euo pipefail; \
     zypper -n install --no-recommends \
     libselinux-devel \
-    libseccomp-devel \  
-    musl-gcc \
-    musl-libc-static ; \
+    libseccomp-devel ; \
     # TODO(psaggu): check which repo provides this in SLE BCI images
     # zypper -n install -t pattern devel_basis; \
     zypper -n clean; \
